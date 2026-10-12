@@ -213,7 +213,7 @@
         <div class="kpi-card"><div class="kpi-label">Total Submissions</div><div class="kpi-value" id="kpi-total">0</div></div>
         <div class="kpi-card"><div class="kpi-label">Password Resets</div><div class="kpi-value" id="kpi-password">0</div></div>
         <div class="kpi-card"><div class="kpi-label">App Issues / Installs</div><div class="kpi-value" id="kpi-apps">0</div></div>
-        <div class="kpi-card"><div class="kpi-label">Other Issues</div><div class="kpi-value" id="kpi-other">0</div></div>
+        <div class="kpi-card"><div class="kpi-label">IPAD Issues</div><div class="kpi-value" id="kpi-other">0</div></div>
     </section>
 
     <section class="table-container">
@@ -305,7 +305,7 @@
                     passwordCount++;
                 } else if (issueLower.includes('app') || (ipadApp !== 'Not Applicable' && ipadApp !== '-') || appToInstall !== '-') {
                     appCount++;
-                } else {
+                } else if (issueLower.includes('ipad') || appToInstall !== '-') {
                     otherCount++;
                 }
 
