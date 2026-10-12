@@ -301,7 +301,7 @@
 
                 // Categorize for KPIs
                 const issueLower = String(issueType).toLowerCase();
-                if (issueLower.includes('password') || issueLower.includes('mims')) {
+                if (issueLower.includes('password') || issueLower.includes('mims') || issueLower.includes('edupage') || issueLower.includes('sls')) {
                     passwordCount++;
                 } else if (issueLower.includes('app') || (ipadApp !== 'Not Applicable' && ipadApp !== '-') || appToInstall !== '-') {
                     appCount++;
