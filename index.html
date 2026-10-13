@@ -213,7 +213,7 @@
         <div class="kpi-card"><div class="kpi-label">Total Submissions</div><div class="kpi-value" id="kpi-total">0</div></div>
         <div class="kpi-card"><div class="kpi-label">Password Resets</div><div class="kpi-value" id="kpi-password">0</div></div>
         <div class="kpi-card"><div class="kpi-label">App Issues / Installs</div><div class="kpi-value" id="kpi-apps">0</div></div>
-        <div class="kpi-card"><div class="kpi-label">IPAD Issues</div><div class="kpi-value" id="kpi-other">0</div></div>
+        <div class="kpi-card"><div class="kpi-label">IPAD Issues</div><div class="kpi-value" id="kpi-ipad">0</div></div>
     </section>
 
     <section class="table-container">
@@ -240,7 +240,6 @@
 
     <script>
         const SHEET_ID = '1W1ZuO0kAfWFcqfwf4jJ50fRaB2ZDctFKsgFzWDFP_Wk';
-
         // JSONP Callback handler executed by Google Visualization API response
         window.handleGoogleSheetData = function(json) {
             try {
@@ -283,8 +282,9 @@
             let total = rows.length;
             let passwordCount = 0;
             let appCount = 0;
-            let otherCount = 0;
+            let ipadCount = 0;
             let html = '';
+            
 
             // Render rows in reverse chronological order (newest on top)
             for (let i = rows.length - 1; i >= 0; i--) {
@@ -303,13 +303,12 @@
                 const issueLower = String(issueType).toLowerCase();
                 if (issueLower.includes('password') || issueLower.includes('mims') || issueLower.includes('edupage') || issueLower.includes('sls')) {
                     passwordCount++;
-                } else if (issueLower.includes('app') || (ipadApp !== 'Not Applicable' && ipadApp !== '-') || appToInstall !== '-') {
+                } else if (issueLower.includes('app') || appToInstall !== '-') {
                     appCount++;
-                } else if (issueLower.includes('ipad') || appToInstall !== '-') {
-                    otherCount++;
-                } else {
-                     otherCount++;
-                }
+                } else if (issueLower.includes('ipad') || ipadApp !== '-') {
+                    ipadCount++;
+                } 
+                
 
                 html += `
                     <tr>
@@ -328,7 +327,7 @@
             document.getElementById('kpi-total').textContent = total;
             document.getElementById('kpi-password').textContent = passwordCount;
             document.getElementById('kpi-apps').textContent = appCount;
-            document.getElementById('kpi-other').textContent = otherCount;
+            document.getElementById('kpi-ipad').textContent = ipadCount;
 
             // Render Table Rows
             document.getElementById('table-body').innerHTML = html || '<tr><td colspan="7" style="text-align:center;">No records found.</td></tr>';
